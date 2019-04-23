@@ -10,6 +10,7 @@ const shortid = require('shortid');
 const response = require('./../libs/responseLib');
 const timeSet = require('./../libs/timeZone');
 const check = require('./../libs/check');
+const loggera = require('./../libs/loggerLib');
 
 const BlogModel = mongoose.model('blogs');
 
@@ -20,13 +21,16 @@ let getAllBlog = (req, res) =>{
         .exec((err, result) => {
             if (err) {
                 console.log(err);
+                loggera.error(err.message,'Blog Controller: getAllBlog',10);
                 let apiResponse = response.generate(true, 'Failed to find Blog details', 500, null);
                 res.send(apiResponse);
             }
             else if(check.isEmpty(result)){
+                loggera.info('No Blog found','Blog Controller: getAllBlog',9);
                 let apiResponse = response.generate(true, 'No blog found', 404, null);
                 res.send(apiResponse);
             } else {
+                loggera.info('Blog found','Blog Controller: getAllBlog',0);
                 let apiResponse = response.generate(false, 'All blog details', 200, result);
                 res.send(apiResponse);
             }
@@ -49,15 +53,17 @@ let createBlog = (req, res) =>{
     let tags = (req.body.tags != undefined || req.body.tags == null 
         || req.body.tags == '') ? req.body.tags.split(',') : [];
     newBlog.tags = tags;
-    newBlog.createdOn = timeSet.getLocal();
+    newBlog.createdOn = timeSet.now();
 
     newBlog.save((err, result) => {
         if (err) {
             console.log(err);
+            loggera.error(err.message,'Blog Controller: create Blog',10);
             let apiResponse = response.generate(true, 'Error in creating blog', 500, null);
             res.send(apiResponse);
         }
         else {
+            loggera.info('Blog created','Blog Controller: createBlog',0);
             let apiResponse = response.generate(false, 'Blog creation success', 200, result);
             res.send(apiResponse);
         }
