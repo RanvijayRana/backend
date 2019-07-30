@@ -7,7 +7,7 @@ let errorHandler = (err,req,res,next) =>{
 } //end request ip logger function
 
 let notFoundHandler = (req,res,next) =>{
-    console.log("Global not found handler called");
+    console.log("Global route not found handler called");
     let apiResponse = response.generate(true, 'route not found', 404, null);
     res.send(apiResponse);
 }// end not found handler

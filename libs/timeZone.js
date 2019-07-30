@@ -3,11 +3,11 @@ const momenttz = require('moment-timezone');
 const timeZone = 'Asia/Calcutta';
 
 let now = () => {
-    return moment().format('LLLL');
+    return moment().format('MMMM Do YYYY, h:mm:ss a');
 }
 
 let getLocalTime = () => {
-    return moment().tz(timeZone).format('LLLL');
+    return moment().tz(timeZone).format();
 }
 
 let convertToLocalTime = (time) =>{

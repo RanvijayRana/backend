@@ -38,8 +38,6 @@ let blogSchema = new Schema(
         },
         tags:[],
         createdOn:{
-            type:Date,
-            defaulut:Date.now()
         }
     }
 );
