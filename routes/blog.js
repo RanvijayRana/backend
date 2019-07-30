@@ -11,8 +11,8 @@ let setRouter = (app) => {
     app.get(baseUrl+'/view/by/author/:author',blogController.viewByAuthor);
     app.get(baseUrl+'/view/by/category/:category',blogController.viewByCategory);
 
-    app.post(baseUrl+'/:blogId/delete',blogController.deleteBlog);
-    app.put(baseUrl+'/:blogId/edit',blogController.editBlog);
+    app.post(baseUrl+'/delete/:blogId',blogController.deleteBlog);
+    app.put(baseUrl+'/edit/:blogId',blogController.editBlog);
     app.post(baseUrl+'/create',blogController.createBlog);
 
     app.get(baseUrl+'/:blogId/count/view',blogController.increaseBlogView);

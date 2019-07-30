@@ -1,8 +1,3 @@
-// let testRoute = (req, res) => {
-//     console.log(req.params);
-//     res.send(req.params);
-// }
-
 const express = require('express');
 require('./../models/BlogModel');
 const mongoose = require('mongoose');
