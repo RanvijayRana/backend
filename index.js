@@ -6,12 +6,15 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const globalErrorMW = require('./middlewares/appErrorHandler');
 const routeLoggerMW = require('./middlewares/routeLogger');
+const helmet = require('helmet');
 
 const app = express()
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(cookieParser());
+
+app.use(helmet());
 
 app.use(globalErrorMW.globalError);
 app.use(routeLoggerMW.logIp);
